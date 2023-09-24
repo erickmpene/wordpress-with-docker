@@ -8,8 +8,6 @@ services:
       - database:/var/lib/mysql
     env_file:
       - ./env_mysql
-    ports:
-      - 3306:3306
     networks:
       - wp_net
   wp:
