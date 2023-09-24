@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    container_name: mysql
+    image: mysql
+    volumes:
+      - database:/var/lib/mysql
+    env_file:
+      - ./env_mysql
+    ports:
+      - 3306:3306
+    networks:
+      - wp_net
+  wp:
+    container_name: wp
+    volumes:
+      - data:/var/www/html
+    image: wordpress
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    env_file:
+      - ./env_wp
+    networks:
+      - wp_net
+volumes:
+  database:
+  data:
+networks:
+  wp_net:
